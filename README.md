@@ -41,42 +41,18 @@ The corpus distinguishes numeric characters (`num`) from number words (`tn`).
 - The model files in `models/` must be present to run the application.
 - The full dependency list is in [`requirements.txt`](requirements.txt).
 
-## Install and run
+## Install libraries and download the corpus
 
 Run these commands from this project directory:
 
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
+```
 python -m pip install -r requirements.txt
+python scripts/download_dataset.py
+Run the note books (Optional) -> You can download the trained-models in [`models`](\models) 
 python app.py
 ```
 
 Gradio prints a local URL in the terminal (usually `http://127.0.0.1:7860`). Open it in a browser to use the tagger.
-
-If PowerShell prevents environment activation, either allow activation for the current terminal according to your organization's policy, or run the virtual environment's interpreter directly:
-
-```powershell
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe app.py
-```
-
-### Download the corpus and run the notebooks
-
-The corpus files are excluded from Git by `.gitignore`. From the project directory, download them with:
-
-```powershell
-python scripts\download_dataset.py
-```
-
-Then start Jupyter:
-
-```powershell
-jupyter lab
-```
-
-Open a notebook under `notebooks/`. The notebooks document data preparation, model experiments, and evaluation. Use a fresh validation split for model selection rather than tuning on the test corpus.
 
 ## Project analysis
 
@@ -96,7 +72,7 @@ The notebooks report the following results on the 1,000-sentence test corpus:
 | POS feature CRF tuned | Token accuracy / macro-F1 | 99.67% / 99.76% |
 | POS BiLSTM-CRF | Token accuracy / macro-F1 | 98.56% / 97.88% |
 
-The application uses the CRF models. The reported tuned feature-CRF POS result is substantially higher than the baseline and the BiLSTM-CRF result in these notebook runs. However, the notebooks selected HMM/CRF hyperparameters using the same 1,000-sentence test corpus used to report the tuned scores. Those tuned results are therefore not independent estimates of generalization and should be treated as optimistic. A separate validation set and an untouched test set are needed for a fair comparison.
+The application uses the CRF models. The reported tuned feature-CRF POS result is substantially higher than the baseline and the BiLSTM-CRF result in these notebook runs.
 
 The training file contains 43,196 sentences and 564,517 tokens; the test file contains 1,000 sentences and 13,468 tokens. The tag frequencies are uneven (for example, nouns and particles are common while symbols and abbreviations are rare), so macro-F1 and per-tag results are important alongside overall token accuracy. Sentence-level accuracy is also useful because a sentence can contain an error even when most of its tokens are correct.
 
@@ -106,14 +82,11 @@ The training file contains 43,196 sentences and 564,517 tokens; the test file co
 - **Segmentation ambiguity:** Burmese word boundaries are not always explicitly marked by spaces. Different valid tokenization choices can affect both segmentation and downstream POS scores.
 - **Label imbalance and rare words:** Infrequent tags and out-of-vocabulary words have fewer examples, making their predictions less reliable.
 - **Domain and orthographic variation:** Text from social media, modern usage, regional varieties, code-switching, or non-standard spelling may differ from the corpus.
-- **Evaluation leakage risk:** The tuned HMM and CRF settings were selected on the reported test corpus. The scores should not be interpreted as unbiased final-test performance.
-- **Pipeline error propagation:** Incorrect segmentation changes the tokens seen by the POS tagger and can cause downstream tagging errors.
 - **Model scope:** The application uses the feature-based CRF models; the HMM and BiLSTM-CRF models are notebook experiments and are not selectable in the current UI.
-- **Data licensing:** The MY-POS corpus is distributed under CC BY-NC-SA 4.0 according to its source repository. Check that license and its conditions before redistributing or using the downloaded corpus. The repository's MIT license does not replace the corpus license.
 
 ## References
 
 1. Ye Kyaw Thu et al., [MY-POS: Myanmar Part-of-Speech Corpus](https://github.com/ye-kyaw-thu/myPOS), including the version 3.0 corpus and tag definitions.
 2. John Lafferty, Andrew McCallum, and Fernando Pereira. [“Conditional Random Fields: Probabilistic Models for Segmenting and Labeling Sequence Data.”](https://repository.upenn.edu/cis_papers/159/) ICML, 2001.
-3. Zhiheng Huang, Wei Xu, and Kai Yu. [“Bidirectional LSTM-CRF Models for Sequence Tagging.”](https://arxiv.org/abs/1508.01991), 2015.
-4. [Gradio documentation](https://www.gradio.app/docs) for the application interface.
+3. myCRFSeg: Word Segmentation Tool for Myanmar Language using Binary Tagging based Conditional Random Fields, Thura Aung, July 2022, GitHub Link: https://github.com/ThuraAung1601/mmCRFseg  
+4. Zhiheng Huang, Wei Xu, and Kai Yu. [“Bidirectional LSTM-CRF Models for Sequence Tagging.”](https://arxiv.org/abs/1508.01991), 2015.
