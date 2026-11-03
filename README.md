@@ -87,6 +87,6 @@ The training file contains 43,196 sentences and 564,517 tokens; the test file co
 ## References
 
 1. Ye Kyaw Thu et al., [MY-POS: Myanmar Part-of-Speech Corpus](https://github.com/ye-kyaw-thu/myPOS), including the version 3.0 corpus and tag definitions.
-2. John Lafferty, Andrew McCallum, and Fernando Pereira. [“Conditional Random Fields: Probabilistic Models for Segmenting and Labeling Sequence Data.”]([https://repository.upenn.edu/cis_papers/159/](https://www.cs.columbia.edu/~jebara/6772/papers/crf.pdf)) ICML, 2001.
+2. John Lafferty, Andrew McCallum, and Fernando Pereira. [“Conditional Random Fields: Probabilistic Models for Segmenting and Labeling Sequence Data.”](https://www.cs.columbia.edu/~jebara/6772/papers/crf.pdf) ICML, 2001.
 3. myCRFSeg: Word Segmentation Tool for Myanmar Language using Binary Tagging based Conditional Random Fields, Thura Aung, July 2022, GitHub Link: https://github.com/ThuraAung1601/mmCRFseg  
 4. Zhiheng Huang, Wei Xu, and Kai Yu. [“Bidirectional LSTM-CRF Models for Sequence Tagging.”](https://arxiv.org/abs/1508.01991), 2015.
