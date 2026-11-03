@@ -1,0 +1,9 @@
+numpy
+pandas
+scikit-learn
+matplotlib
+jupyter
+sklearn-crfsuite
+torch
+pytorch-crf
+gradio
