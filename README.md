@@ -48,7 +48,7 @@ Run these commands from this project directory:
 ```
 python -m pip install -r requirements.txt
 python scripts/download_dataset.py
-Run the note books (Optional) -> You can download the trained-models in [`models`](\models) 
+Run the note books (Optional) -> You can download the trained-models in [`models`](/models/) 
 python app.py
 ```
 
